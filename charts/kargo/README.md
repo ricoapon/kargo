@@ -59,8 +59,8 @@ Optionally point to Kubernetes Secrets containing kubeconfig for:
 2. A remote cluster hosting Argo CD resources
 
 3. A remote cluster that is running Argo Rollouts and is a suitable location
-to execute user-defined verification processes in the form of Argo
-Rollouts AnalysisRuns
+   to execute user-defined verification processes in the form of Argo
+   Rollouts AnalysisRuns
 
 This flexibility is useful for various advanced use cases -- especially
 topologies where Kargo data may be sharded, with Kargo controllers distributed
@@ -309,3 +309,4 @@ the Kargo controller is running.
 | `webhooksServer.affinity`                   | Specifies pod affinity for the webhooks server pods. Defaults to `global.affinity`.                                                                                                                                                                                                                                                                                                   | `{}`   |
 | `webhooksServer.securityContext`            | Security context for webhooks server pods. Defaults to `global.securityContext`.                                                                                                                                                                                                                                                                                                      | `{}`   |
 | `webhooksServer.tls.selfSignedCert`         | Whether to generate a self-signed certificate for the controller's built-in webhook server. If `true`, `cert-manager` CRDs **must** be present in the cluster. Kargo will create and use its own namespaced issuer. If `false`, a cert secret named `kargo-webhooks-server-cert` **must** be provided in the same namespace as Kargo. There is no provision for webhooks without TLS. | `true` |
+| `webhooksServer.tls.cert`                   | PEM-encoded TLS certificate (which should also be stored in `kargo-webhooks-server-cert`) to trust when `webhooksServer.tls.selfSignedCert` is **false**. When that cert is *already* trusted by the cluster, ignore this parameter. When it is *not* trusted (e.g. self-signed), configure the cert here.                                                                            | `""`   |
